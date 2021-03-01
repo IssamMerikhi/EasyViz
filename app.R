@@ -1,23 +1,20 @@
+df = read.csv("C:/Users/Elève/Desktop/PL.csv")
+library(tidyr)
+library(ggplot2)
 library(shiny)
+library(shinydashboard)
 
-# Define UI for miles per gallon app ----
-ui <- pageWithSidebar(
-  
-  # App title ----
-  headerPanel(title = "First Try"),
-  
-  # Sidebar panel for inputs ----
-  sidebarPanel(),
-  
-  # Main panel for displaying outputs ----
-  mainPanel(plotOutput("correlation_plot"), width = 8)
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
 )
 
-# Define server logic to plot various variables against mpg ----
-server <- function(input, output) {
-  output$correlation_plot = renderPlot({
-    plot(iris$Sepal.Length, iris$Petal.Length)
-  })
-}
+server <- function(input, output) { }
 
 shinyApp(ui, server)
+
+
+ggplot(gather(mtcars), aes(value)) + 
+  geom_bar() + 
+  facet_wrap(~key, scales = 'free_x')
