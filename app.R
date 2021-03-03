@@ -22,6 +22,7 @@ header <- dashboardHeader(title = "EasyViz")
 sidebar <- dashboardSidebar(
   sidebarMenu(
     fileInput("file", "Upload", multiple = TRUE),
+    menuItem("Summary", tabName = "file", icon = icon("dashboard")),
     menuItem("Histogram", tabName = "hist", icon = icon("dashboard")),
     menuItem("Heatmap", tabName = "heat", icon = icon("th"))
     )
@@ -31,8 +32,8 @@ sidebar <- dashboardSidebar(
 
 body <- dashboardBody(
   tabItems(
+    tabItem(tabName = "file", tableOutput("input_file")),
     
-    tableOutput("input_file"),
     
     tabItem(tabName = "hist",
             fluidRow(box(plotOutput("plot1", height = 400, width = 400),
