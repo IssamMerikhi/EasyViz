@@ -16,11 +16,12 @@ df.team_data$performance <- rnorm(nrow(df.team_data))
 
 
 
-header <- dashboardHeader(title = "First RShiny Dashboard")
+header <- dashboardHeader(title = "EasyViz")
 
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
+    fileInput("file", "Upload", multiple = TRUE),
     menuItem("Histogram", tabName = "hist", icon = icon("dashboard")),
     menuItem("Heatmap", tabName = "heat", icon = icon("th"))
     )
@@ -30,6 +31,9 @@ sidebar <- dashboardSidebar(
 
 body <- dashboardBody(
   tabItems(
+    
+    tableOutput("input_file"),
+    
     tabItem(tabName = "hist",
             fluidRow(box(plotOutput("plot1", height = 400, width = 400),
                          title = "Histogram"))),
@@ -64,6 +68,15 @@ server <- function(input, output) {
   
   output$plot2 <- renderPlot({ggplot(data = df.team_data, aes(x = metrics, y = teams)) +
       geom_tile(aes(fill = performance)) })
+  
+  output$input_file <- renderTable({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    read.csv(file_to_read$datapath)
+  })
+  
   
 }
 
