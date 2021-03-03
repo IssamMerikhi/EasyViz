@@ -1,1 +1,1 @@
-# AppR
+# EasyViz
