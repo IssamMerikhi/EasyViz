@@ -4,6 +4,7 @@ library(shiny)
 library(shinydashboard)
 library(heatmaply)
 source("cleandata.r")
+source("graphics.r")
 
 
 
@@ -26,7 +27,10 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     fileInput(inputId = "file", "Upload", multiple = TRUE),
     menuItem("Data", tabName = "data", icon = icon("data")),
-    menuItem("Histogram", tabName = "file", icon = icon("dashboard"))
+    menuItem("Histogram", tabName = "file", icon = icon("dashboard")),
+    menuItem("Heatmap", tabName = "heat", icon = icon("th")),
+    menuItem("Density", tabName = "dens", icon = icon("th"))
+    
     
 
   )
@@ -37,8 +41,12 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
-    tabItem(tabName = "file", plotOutput(outputId = "input_file"))
-  )
+    tabItem(tabName = "file", plotOutput(outputId = "input_file")),
+    tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
+    tabItem(tabName = "dens", plotOutput(outputId = "densi"))
+    
+    
+      )
 )
 
 
@@ -77,6 +85,25 @@ server <- function(input, output) {
     barplot(a)
   })
   
+  
+  output$heatm <- renderPlot({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    df = read.csv(file_to_read$datapath)
+    df = cleanData(df)
+    heatgraph(df)
+  })
+  
+  output$densi <- renderPlot({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    df = read.csv(file_to_read$datapath)
+    densgraph(df)
+  })
   
   
   
