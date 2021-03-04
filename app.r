@@ -24,7 +24,8 @@ header <- dashboardHeader(title = "EasyViz")
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
-    fileInput("file", "Upload", multiple = TRUE),
+    fileInput(inputId = "file", "Upload", multiple = TRUE),
+    menuItem("Data", tabName = "data", icon = icon("data")),
     menuItem("Histogram", tabName = "file", icon = icon("dashboard"))
     
 
@@ -35,7 +36,8 @@ sidebar <- dashboardSidebar(
 
 body <- dashboardBody(
   tabItems(
-    tabItem(tabName = "file", plotOutput("input_file"))
+    tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
+    tabItem(tabName = "file", plotOutput(outputId = "input_file"))
   )
 )
 
@@ -54,7 +56,15 @@ ui <- dashboardPage(header, sidebar, body)
 
 server <- function(input, output) {
   
-  
+  output$tabledata <- renderTable({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    c = read.csv(file_to_read$datapath)
+    cleanData(c)
+    
+  })
   
   
   output$input_file <- renderPlot({
