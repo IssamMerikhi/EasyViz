@@ -26,10 +26,11 @@ header <- dashboardHeader(title = "EasyViz")
 sidebar <- dashboardSidebar(
   sidebarMenu(
     fileInput(inputId = "file", "Upload", multiple = TRUE),
-    menuItem("Data", tabName = "data", icon = icon("data")),
-    menuItem("Histogram", tabName = "file", icon = icon("dashboard")),
-    menuItem("Heatmap", tabName = "heat", icon = icon("th")),
-    menuItem("Density", tabName = "dens", icon = icon("th"))
+    menuItem("Data", tabName = "data", icon = icon("database")),
+    menuItem("Histogram", tabName = "file", icon = icon("chart-bar")),
+    menuItem("Heatmap", tabName = "heat", icon = icon("sitemap")),
+    menuItem("Density", tabName = "dens", icon = icon("chart-line")),
+    menuItem("Built By", tabName = "bb", icon = icon("tools"))
     
     
 
@@ -39,15 +40,19 @@ sidebar <- dashboardSidebar(
 
 
 body <- dashboardBody(
-  tabItems(
-    tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
-    tabItem(tabName = "file", plotOutput(outputId = "input_file")),
-    tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
-    tabItem(tabName = "dens", plotOutput(outputId = "densi"))
-    
-    
+  fluidRow(
+    tabItems(
+      
+      tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
+      tabItem(tabName = "file", plotOutput(outputId = "input_file")),
+      tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
+      tabItem(tabName = "dens", plotOutput(outputId = "densi")),
+      tabItem(tabName = "bb", infoBoxOutput(outputId = "infob")),
+      tabItem(tabName = "bb", infoBoxOutput(outputId = "infob2"))
+      
       )
-)
+    )
+  )
 
 
 
@@ -103,6 +108,13 @@ server <- function(input, output) {
     }
     df = read.csv(file_to_read$datapath)
     densgraph(df)
+  })
+  
+  output$infob <- renderInfoBox({
+    infoBox(
+      "About Me", paste0(25 + input$count, "%"), icon = icon("info"),
+      color = "purple"
+    )
   })
   
   
