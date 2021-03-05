@@ -20,7 +20,7 @@ df.team_data$performance <- rnorm(nrow(df.team_data))
 
 
 
-header <- dashboardHeader(title = "EasyViz")
+header <- dashboardHeader(title = "EasyViz", dropdownMenuOutput(outputId = "menu"))
 
 
 sidebar <- dashboardSidebar(
@@ -29,9 +29,8 @@ sidebar <- dashboardSidebar(
     menuItem("Data", tabName = "data", icon = icon("database")),
     menuItem("Histogram", tabName = "file", icon = icon("chart-bar")),
     menuItem("Heatmap", tabName = "heat", icon = icon("sitemap")),
-    menuItem("Density", tabName = "dens", icon = icon("chart-line")),
-    menuItem("Built By", tabName = "bb", icon = icon("tools"))
-    
+    menuItem("Density", tabName = "dens", icon = icon("chart-line"))
+
     
 
   )
@@ -46,10 +45,8 @@ body <- dashboardBody(
       tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
       tabItem(tabName = "file", plotOutput(outputId = "input_file")),
       tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
-      tabItem(tabName = "dens", plotOutput(outputId = "densi")),
-      tabItem(tabName = "bb", infoBoxOutput(outputId = "infob")),
-      tabItem(tabName = "bb", infoBoxOutput(outputId = "infob2"))
-      
+      tabItem(tabName = "dens", plotOutput(outputId = "densi"))
+
       )
     )
   )
@@ -110,16 +107,12 @@ server <- function(input, output) {
     densgraph(df)
   })
   
-  output$infob <- renderInfoBox({
-    infoBox(
-      "About Me", paste0(25 + input$count, "%"), icon = icon("info"),
-      color = "purple"
-    )
+  
+  output$menu <- renderMenu({
+    
   })
-  
-  
-  
-  
+
+
 }
 
 shinyApp(ui, server)
