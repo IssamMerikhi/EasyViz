@@ -21,32 +21,30 @@ Graphs have been made with plotly. They are _interactives_. The user can see mor
 
 ## Usage
 
-The App has been made the simplest possible. The 4 topics are displayed in 4 differents and distincts blocks. Once the topic choosed, the user can **CLICK on the DROPDOWN** which provides differents subtopics on a concept.
+The App has been made the simplest possible. The user must opload his data and then plays with the categories to choose the graph we want to show.
 
-As example, the user can choose the functions topic and choose a 2nd degree function with n-shape or U-shape. Be careful, since the coefficients are ceated randomly the user can fall with a 2nd degree function with a=0 which will be just a line.
+As example, the user 
 
 
 <img src ="assets/function.gif" width = "auto" height = "auto">
-
-Again the user is in the Vector topic. Right here points are created randomly. Here the dropdown offers 2 choices, randoms vectors or orthogonals vectors. The teachers can give the 4 points by hovering the graph and let the students plot the vectors and calculate if they are orthogonal or not.
 
 
 <img src ="assets/vector.gif" width = "auto" height = "auto">
 
 ## Built With
 
-- [plotly](https://plotly.com/python/) - Interactive graphics
-- [dash](https://plotly.com/dash/) - For the application
+- [ggplot2](https://www.r-graph-gallery.com/) - Graphics
+- [RShiny](https://rstudio.github.io/shinydashboard/) - For the application
 - [heroku](https://dashboard.heroku.com/) - Cloud Application Plateform
 
 ## Contributing
 
-We appreciate all contributions to improve Maths78. For major changes, please open an issue first to discuss what you would like to change.
+We appreciate all contributions to improve EasyViz. For major changes, please open an issue first to discuss what you would like to change.
 
 
 ## Authors and acknoledgment
 
-Developped by Issam Merikhi with the support Tiphaine Richard as a entertaining project.
+Developped by Issam Merikhi as a entertaining project.
 
 ## License
 
