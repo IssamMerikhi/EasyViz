@@ -8,13 +8,13 @@ The App : [EasyViz]()
 
 # Documentation
 
-EasyViz is your new little business technology. If you want to clearly and **EASYLY** look and understand your data you just have to naviguate accros the categories :
+EasyViz is your new little business technology. If you want to clearly and **EASYLY** look and understand your data you just have to **_UPLOAD your CSV file_** naviguate accros the categories :
 
 
-- Orthogonal and parallel lines
-- Arithmetics and geometrics sequences.
-- Vectors and orthogonality
-- 2nd and 3rd functions degree and their derivatives.
+- Density
+- Heatmap
+- Histograms
+- Network
 
 Exercises are computed with random coefficients which provides the user an infinite of exercises. No need to prepare classes _ANYMORE_.
 Graphs have been made with plotly. They are _interactives_. The user can see more informations by _hovering graphs_.
