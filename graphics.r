@@ -2,8 +2,8 @@ library(ggplot2)
 library(reshape2)
 library(zoo)
 library(igraph)
-library(networkD3)
 source("cleandata.r")
+
 
 
 
@@ -34,4 +34,12 @@ densgraph <- function(yourData){
   plot(df, main = "Densities")
   
 }
+
+
+net <- function(yourData){
+  df = yourData
+  df = cleanData(df)
+  plot(graph_from_incidence_matrix(yourData))
+} 
+
 
