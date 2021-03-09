@@ -28,9 +28,10 @@ sidebar <- dashboardSidebar(
     fileInput(inputId = "file", "Upload", multiple = TRUE),
     menuItem("Data", tabName = "data", icon = icon("database")),
     menuItem("Histogram", tabName = "file", icon = icon("chart-bar")),
-    menuItem("Heatmap", tabName = "heat", icon = icon("sitemap")),
-    menuItem("Density", tabName = "dens", icon = icon("chart-line"))
-
+    menuItem("Heatmap", tabName = "heat", icon = icon("chess-board")),
+    menuItem("Density", tabName = "dens", icon = icon("chart-line")),
+    menuItem("Network", tabName = "net", icon = icon("sitemap"))
+    
     
 
   )
@@ -45,8 +46,9 @@ body <- dashboardBody(
       tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
       tabItem(tabName = "file", plotOutput(outputId = "input_file")),
       tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
-      tabItem(tabName = "dens", plotOutput(outputId = "densi"))
-
+      tabItem(tabName = "dens", plotOutput(outputId = "densi")),
+      tabItem(tabName = "net", plotOutput(outputId = "netw"))
+      
       )
     )
   )
@@ -108,13 +110,16 @@ server <- function(input, output) {
   })
   
   
-  output$menu <- renderMenu({
-    
+  output$netw <- renderPlot({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    df = read.csv(file_to_read$datapath)
+    net(df)
   })
 
 
 }
 
 shinyApp(ui, server)
-
-
