@@ -8,15 +8,6 @@ source("graphics.r")
 
 
 
-df.team_data <- expand.grid(teams = c("Team A", "Team B", "Team C", "Team D")
-                            ,metrics = c("Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5")
-)
-# add variable: performance
-set.seed(41)
-df.team_data$performance <- rnorm(nrow(df.team_data))
-
-
-
 
 
 
@@ -43,9 +34,11 @@ body <- dashboardBody(
   fluidRow(
     tabItems(
       
-      tabItem(tabName = "data", tableOutput(outputId = "tabledata")),
+      tabItem(tabName = "data", h2 = "Your clear Data", tableOutput(outputId = "tabledata")),
       tabItem(tabName = "file", plotOutput(outputId = "input_file")),
-      tabItem(tabName = "heat", plotOutput(outputId = "heatm")),
+      tabItem(tabName = "heat",
+              fluidRow(box(plotOutput(outputId = "heatm"))),
+              fluidRow(box(plotOutput(outputId = "heatm2", width = "800px", height = "600px")))),
       tabItem(tabName = "dens", plotOutput(outputId = "densi")),
       tabItem(tabName = "net", plotOutput(outputId = "netw"))
       
@@ -63,8 +56,7 @@ body <- dashboardBody(
 
 
 
-
-ui <- dashboardPage(header, sidebar, body)
+ui <- dashboardPage(header, sidebar, body, skin = "black")
 
 server <- function(input, output) {
   
@@ -99,6 +91,20 @@ server <- function(input, output) {
     df = cleanData(df)
     heatgraph(df)
   })
+  
+  
+  output$heatm2 <- renderPlot({
+    file_to_read = input$file
+    if(is.null(file_to_read)){
+      return()
+    }
+    df = read.csv(file_to_read$datapath)
+    df = cleanData(df)
+    heatgraph(df)
+  })
+  
+  
+  
   
   output$densi <- renderPlot({
     file_to_read = input$file
