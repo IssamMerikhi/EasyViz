@@ -21,7 +21,8 @@ sidebar <- dashboardSidebar(
     menuItem("Histogram", tabName = "hist", icon = icon("chart-bar")),
     menuItem("Heatmap", tabName = "heat", icon = icon("chess-board")),
     menuItem("Density", tabName = "dens", icon = icon("chart-line")),
-    menuItem("Network", tabName = "net", icon = icon("sitemap"))
+    menuItem("Network", tabName = "net", icon = icon("sitemap")),
+    menuItem("Built By", tabName = "bb", icon = icon("tools"))
     
     
 
@@ -36,7 +37,7 @@ body <- dashboardBody(
       
       tabItem(tabName = "data",
               fluidRow(infoBoxOutput(outputId = "IBdata", width = 10)),
-              fluidRow(box(tableOutput(outputId = "tabledata")))),
+              fluidRow(box(tableOutput(outputId = "tabledata"), width = 10))),
       tabItem(tabName = "hist",
               fluidRow(infoBoxOutput(outputId = "IBhist", width = 10)),
               fluidRow(box(plotOutput(outputId = "histo"), width = 10))),
@@ -48,7 +49,9 @@ body <- dashboardBody(
               fluidRow(box(plotOutput(outputId = "densi"), width = 10))),
       tabItem(tabName = "net",
               fluidRow(infoBoxOutput(outputId = "IBnet", width = 10)),
-              fluidRow(box(plotOutput(outputId = "netw"), width = 10)))
+              fluidRow(box(plotOutput(outputId = "netw"), width = 10))),
+      tabItem(tabName = "bb",
+              fluidRow(infoBoxOutput(outputId = "IBbb", width = 10)))
       
       )
     )
@@ -128,7 +131,8 @@ server <- function(input, output) {
   
   output$IBdata <- renderInfoBox({
     infoBox(title = "Data InfoBox",
-            subtitle = "Your cleaned Data",
+            value = "Processing",
+            subtitle = "Your cleaned Data. Keep all the numeric variables.",
             icon = shiny::icon("database"),
             fill = TRUE)
   })
@@ -137,7 +141,8 @@ server <- function(input, output) {
 
   output$IBheat <- renderInfoBox({
     infoBox(title = "Heatmap InfoBox",
-            subtitle = "Your Heatmap sucks",
+            value = "Correlation",
+            subtitle = "Heatmap plot. Clearest cases shows the positive correlation between variables. Darkest cases shows negative correlation.",
             icon = shiny::icon("chess-board"),
             fill = TRUE)
   })
@@ -145,7 +150,8 @@ server <- function(input, output) {
   
   output$IBhist <- renderInfoBox({
     infoBox(title = "Histogram InfoBox",
-            subtitle = "Your Histogram sucks",
+            value = "Distribution",
+            subtitle = "Histogram plot. All hisograms are plotted one by one.",
             icon = shiny::icon("chart-bar"),
             fill = TRUE)
   })
@@ -153,7 +159,8 @@ server <- function(input, output) {
   
   output$IBdens <- renderInfoBox({
     infoBox(title = "Histogram InfoBox",
-            subtitle = "Your Histogram sucks",
+            value = "Distribution",
+            subtitle = "Density plot. All your densities are plots one by one.",
             icon = shiny::icon("chart-line"),
             fill = TRUE)
   })
@@ -162,12 +169,24 @@ server <- function(input, output) {
   
   output$IBnet <- renderInfoBox({
     infoBox(title = "Network InfoBox",
-            subtitle = "Visualise your network Data",
+            value = "Connexion",
+            subtitle = "Visualise the network and connexions of your variables in your data",
             icon = shiny::icon("sitemap"),
             color = 'orange',
             fill = TRUE)
   })
   
+  output$IBbb <- renderInfoBox({
+    infoBox(title = "Built By",
+            value = "Issam Merikhi - 2021 - All right reserved",
+            subtitle = "UDS - University of Strasbourg",
+            icon = shiny::icon("tools"),
+            color = 'green',
+            href = "https://github.com/IssamMerikhi",
+            fill = TRUE)
+  })
+  
+
   
   
   
@@ -178,3 +197,5 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
+
