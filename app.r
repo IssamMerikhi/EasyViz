@@ -34,15 +34,21 @@ body <- dashboardBody(
   fluidRow(
     tabItems(
       
-      tabItem(tabName = "data", h2 = "Your clear Data", tableOutput(outputId = "tabledata")),
+      tabItem(tabName = "data",
+              fluidRow(infoBoxOutput(outputId = "IBdata", width = 10)),
+              fluidRow(box(tableOutput(outputId = "tabledata")))),
       tabItem(tabName = "hist",
               fluidRow(infoBoxOutput(outputId = "IBhist", width = 10)),
-              fluidRow(box(plotOutput(outputId = "histo")))),
+              fluidRow(box(plotOutput(outputId = "histo"), width = 10))),
       tabItem(tabName = "heat",
               fluidRow(infoBoxOutput(outputId = "IBheat", width = 10)),
-              fluidRow(box(plotOutput(outputId = "heatm2", width = 20, height = "600px")))),
-      tabItem(tabName = "dens", plotOutput(outputId = "densi")),
-      tabItem(tabName = "net", plotOutput(outputId = "netw"))
+              fluidRow(box(plotOutput(outputId = "heatm2"), width = 10))),
+      tabItem(tabName = "dens",
+              fluidRow(infoBoxOutput(outputId = "IBdens", width = 10)),
+              fluidRow(box(plotOutput(outputId = "densi"), width = 10))),
+      tabItem(tabName = "net",
+              fluidRow(infoBoxOutput(outputId = "IBnet", width = 10)),
+              fluidRow(box(plotOutput(outputId = "netw"), width = 10)))
       
       )
     )
@@ -119,6 +125,15 @@ server <- function(input, output) {
     net(df)
   })
 
+  
+  output$IBdata <- renderInfoBox({
+    infoBox(title = "Data InfoBox",
+            subtitle = "Your cleaned Data",
+            icon = shiny::icon("database"),
+            fill = TRUE)
+  })
+  
+  
 
   output$IBheat <- renderInfoBox({
     infoBox(title = "Heatmap InfoBox",
@@ -135,6 +150,23 @@ server <- function(input, output) {
             fill = TRUE)
   })
   
+  
+  output$IBdens <- renderInfoBox({
+    infoBox(title = "Histogram InfoBox",
+            subtitle = "Your Histogram sucks",
+            icon = shiny::icon("chart-line"),
+            fill = TRUE)
+  })
+  
+  
+  
+  output$IBnet <- renderInfoBox({
+    infoBox(title = "Network InfoBox",
+            subtitle = "Visualise your network Data",
+            icon = shiny::icon("sitemap"),
+            color = 'orange',
+            fill = TRUE)
+  })
   
   
   
