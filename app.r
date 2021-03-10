@@ -18,7 +18,7 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     fileInput(inputId = "file", "Upload", multiple = TRUE),
     menuItem("Data", tabName = "data", icon = icon("database")),
-    menuItem("Histogram", tabName = "file", icon = icon("chart-bar")),
+    menuItem("Histogram", tabName = "hist", icon = icon("chart-bar")),
     menuItem("Heatmap", tabName = "heat", icon = icon("chess-board")),
     menuItem("Density", tabName = "dens", icon = icon("chart-line")),
     menuItem("Network", tabName = "net", icon = icon("sitemap"))
@@ -35,10 +35,12 @@ body <- dashboardBody(
     tabItems(
       
       tabItem(tabName = "data", h2 = "Your clear Data", tableOutput(outputId = "tabledata")),
-      tabItem(tabName = "file", plotOutput(outputId = "input_file")),
+      tabItem(tabName = "hist",
+              fluidRow(infoBoxOutput(outputId = "IBhist", width = 10)),
+              fluidRow(box(plotOutput(outputId = "histo")))),
       tabItem(tabName = "heat",
-              fluidRow(box(plotOutput(outputId = "heatm"))),
-              fluidRow(box(plotOutput(outputId = "heatm2", width = "800px", height = "600px")))),
+              fluidRow(infoBoxOutput(outputId = "IBheat", width = 10)),
+              fluidRow(box(plotOutput(outputId = "heatm2", width = 20, height = "600px")))),
       tabItem(tabName = "dens", plotOutput(outputId = "densi")),
       tabItem(tabName = "net", plotOutput(outputId = "netw"))
       
@@ -71,7 +73,7 @@ server <- function(input, output) {
   })
   
   
-  output$input_file <- renderPlot({
+  output$histo <- renderPlot({
     file_to_read = input$file
     if(is.null(file_to_read)){
       return()
@@ -82,15 +84,7 @@ server <- function(input, output) {
   })
   
   
-  output$heatm <- renderPlot({
-    file_to_read = input$file
-    if(is.null(file_to_read)){
-      return()
-    }
-    df = read.csv(file_to_read$datapath)
-    df = cleanData(df)
-    heatgraph(df)
-  })
+
   
   
   output$heatm2 <- renderPlot({
@@ -126,6 +120,29 @@ server <- function(input, output) {
   })
 
 
+  output$IBheat <- renderInfoBox({
+    infoBox(title = "Heatmap InfoBox",
+            subtitle = "Your Heatmap sucks",
+            icon = shiny::icon("chess-board"),
+            fill = TRUE)
+  })
+  
+  
+  output$IBhist <- renderInfoBox({
+    infoBox(title = "Histogram InfoBox",
+            subtitle = "Your Histogram sucks",
+            icon = shiny::icon("chart-bar"),
+            fill = TRUE)
+  })
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 shinyApp(ui, server)
