@@ -4,7 +4,7 @@
 
 EasyViz is a little App which provides the user to see all the import data he might have. Launch your biz !!!
 
-The App : [EasyViz]()
+The App : [EasyViz](https://issammerikhi.shinyapps.io/easyviz/)
 
 # Documentation
 
