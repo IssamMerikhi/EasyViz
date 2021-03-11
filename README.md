@@ -2,13 +2,13 @@
 
 # EasyViz
 
-EasyViz is a little App which provides the user to see all the import data he might have. Launch your biz !!!
+EasyViz is a little App which provides the user a clear and simple comprehension of his data. Launch your business !
 
 The App : [EasyViz](https://issammerikhi.shinyapps.io/easyviz/)
 
 # Documentation
 
-EasyViz is your new little business technology. If you want to clearly and **EASYLY** look and understand your data you just have to **_UPLOAD your CSV file_** naviguate accros the categories :
+EasyViz is your new little business technology. If you want to **clearly** look and understand your data you just have to _UPLOAD your CSV file_ naviguate accros the categories :
 
 
 - Density
@@ -34,7 +34,7 @@ For the tutorial, I displayed the well known iris dataset.
 
 - [ggplot2](https://www.r-graph-gallery.com/) - Graphics
 - [RShiny](https://rstudio.github.io/shinydashboard/) - For the application
-- [heroku](https://dashboard.heroku.com/) - Cloud Application Plateform
+- [shinapps.io](https://www.shinyapps.io/) - Cloud Application Plateform
 
 ## Contributing
 
