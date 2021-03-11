@@ -1,4 +1,4 @@
-<img src ="assets/banner.png" width = "auto" height = "auto">
+<img src ="images/banner.png" width = "auto" height = "auto">
 
 # EasyViz
 
