@@ -28,7 +28,7 @@ To respect the spirit of a simple and friendly user project, I don't had button 
 For the tutorial, I displayed the well known iris dataset.
 
 
-<img src ="images/eaasyviz.gif" width = "auto" height = "auto">
+<img src ="images/easyviz.gif" width = "auto" height = "auto">
 
 ## Built With
 
