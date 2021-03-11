@@ -23,13 +23,12 @@ Graphs have been made with plotly. They are _interactives_. The user can see mor
 
 The App has been made the simplest possible. The user must opload his data and then plays with the categories to choose the graph we want to show.
 
-As example, the user 
+As example, the user can upload his CSV file via the upload button. Once the data loaded, the user can plays with differents types of visualisation.
+To respect the spirit of a simple and friendly user project, I don't had button to choose range for interval and other kind of stuff.
+For the tutorial, I displayed the well known iris dataset.
 
 
-<img src ="assets/function.gif" width = "auto" height = "auto">
-
-
-<img src ="assets/vector.gif" width = "auto" height = "auto">
+<img src ="images/easyiz.gif" width = "auto" height = "auto">
 
 ## Built With
 
