@@ -43,7 +43,7 @@ We appreciate all contributions to improve EasyViz. For major changes, please op
 
 ## Authors and acknoledgment
 
-Developped by Issam Merikhi as a entertaining project.
+Developped by Issam Merikhi as an entertaining project.
 
 ## License
 
