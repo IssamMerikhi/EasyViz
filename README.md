@@ -16,8 +16,7 @@ EasyViz is your new little business technology. If you want to **clearly** look 
 - Histograms
 - Network
 
-Exercises are computed with random coefficients which provides the user an infinite of exercises. No need to prepare classes _ANYMORE_.
-Graphs have been made with plotly. They are _interactives_. The user can see more informations by _hovering graphs_.
+The app has been created to be user friendly. In this way, anyone who wants to visualise his data can do it very easily and _fastly_.
 
 ## Usage
 
