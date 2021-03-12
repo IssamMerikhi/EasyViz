@@ -3,22 +3,26 @@ library(ggplot2)
 library(shiny)
 library(shinydashboard)
 library(heatmaply)
+library(GGally)
 source("cleandata.r")
 source("graphics.r")
 
 
+title = tags$span(tags$img(src="favicon.png",
+                        height = '50',
+                        width = '50'),
+              'Easy Viz')
 
 
 
-
-header <- dashboardHeader(title = "EasyViz", dropdownMenuOutput(outputId = "menu"))
+header <- dashboardHeader(title = title, dropdownMenuOutput(outputId = "menu"))
 
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
     fileInput(inputId = "file", "Upload", multiple = TRUE),
     menuItem("Data", tabName = "data", icon = icon("database")),
-    menuItem("Histogram", tabName = "hist", icon = icon("chart-bar")),
+    menuItem("Scatter Matrix", tabName = "scat", icon = icon("cloud")),
     menuItem("Heatmap", tabName = "heat", icon = icon("chess-board")),
     menuItem("Density", tabName = "dens", icon = icon("chart-line")),
     menuItem("Network", tabName = "net", icon = icon("sitemap")),
@@ -38,9 +42,9 @@ body <- dashboardBody(
       tabItem(tabName = "data",
               fluidRow(infoBoxOutput(outputId = "IBdata", width = 10)),
               fluidRow(box(tableOutput(outputId = "tabledata"), width = 10))),
-      tabItem(tabName = "hist",
-              fluidRow(infoBoxOutput(outputId = "IBhist", width = 10)),
-              fluidRow(box(plotOutput(outputId = "histo"), width = 10))),
+      tabItem(tabName = "scat",
+              fluidRow(infoBoxOutput(outputId = "IBscat", width = 10)),
+              fluidRow(box(plotOutput(outputId = "scatt"), width = 10))),
       tabItem(tabName = "heat",
               fluidRow(infoBoxOutput(outputId = "IBheat", width = 10)),
               fluidRow(box(plotOutput(outputId = "heatm2"), width = 10))),
@@ -82,15 +86,14 @@ server <- function(input, output) {
   })
   
   
-  output$histo <- renderPlot({
+  output$scatt <- renderPlot({
     file_to_read = input$file
     if(is.null(file_to_read)){
       return()
     }
     df = read.csv(file_to_read$datapath)
-    a = as.numeric(df[,2], drop=FALSE)
-    barplot(a)
-  })
+    scattermatrix(df)
+      })
   
   
 
@@ -148,11 +151,11 @@ server <- function(input, output) {
   })
   
   
-  output$IBhist <- renderInfoBox({
-    infoBox(title = "Histogram InfoBox",
+  output$IBscat <- renderInfoBox({
+    infoBox(title = "Scatter InfoBox",
             value = "Distribution",
-            subtitle = "Histogram plot. All hisograms are plotted one by one.",
-            icon = shiny::icon("chart-bar"),
+            subtitle = "Scatter Matrix plot. Visualise scatter plots of all your features.",
+            icon = shiny::icon("cloud"),
             fill = TRUE)
   })
   
