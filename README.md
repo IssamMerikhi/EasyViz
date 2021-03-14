@@ -2,7 +2,7 @@
 
 # EasyViz
 
-EasyViz is a little App which provides the user a clear and simple comprehension of his data. Launch your business !
+EasyViz is a little App which provides the user a clear and simple comprehension of his data. Ready to launch your business !
 
 The App : [EasyViz](https://issammerikhi.shinyapps.io/easyviz/)
 
